@@ -1,6 +1,22 @@
+import MeetingTypeList from '@/components/MeetingTypeList';
 import React from 'react'
 
 const Home = () => {
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = now.getMinutes();
+    const ampm = hours >= 12 ? 'PM': 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12
+    const time = `${hours}:${minutes} ${ampm}`;
+
+    const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const year = now.getFullYear();
+    const month = months[now.getMonth()];
+    const day = weekdays[now.getDay()];
+    const date  = now.getDate();
+    const currentDate = `${day}, ${month} ${date}, ${year}`;
   return (
     <section className='flex size-full flex-col gap-10 text-white'>
         <div className='h-[300px] w-full rounded-[20px] bg-hero bg-cover'>
@@ -12,14 +28,14 @@ const Home = () => {
                 <div className='flex flex-col gap-2'>
                     <h1 className='text-4xl font-extrabold
                     lg:text-7xl'>
-                        11:30 AM
+                        {time}
                     </h1>
                     <p className='text-lg font-medium text-sky-1
-                    lg:text-2xl'>Saturday, March 23, 2024</p>
+                    lg:text-2xl'>{currentDate}</p>
                 </div>
             </div>
         </div>
-
+        <MeetingTypeList/>
     </section>
   )
 }
